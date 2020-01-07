@@ -13,7 +13,6 @@ import football.db.LeagueDb;
 import football.db.enums.FixtureStatus;
 import football.input.data.fixtures.Fixture;
 import football.repository.FixtureRepository;
-import football.repository.LeagueRepository;
 import football.repository.TeamRepository;
 import lombok.AllArgsConstructor;
 
@@ -22,7 +21,6 @@ import lombok.AllArgsConstructor;
 public class FixtureService {
 	private FixtureRepository fixtureRepository;
 	private TeamRepository teamRepository;
-	private LeagueRepository leagueRepository;
 	private FixtureToFixtureDb fixtureConverter;
 	
 	public void saveFixturesDb(List<FixtureDb> fixtures) {

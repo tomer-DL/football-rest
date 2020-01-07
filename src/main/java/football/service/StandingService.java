@@ -20,7 +20,6 @@ import football.standing.comparator.GoalDifferenceComparator;
 import football.standing.comparator.GoalScoredComparator;
 import football.standing.comparator.PointsComparator;
 import football.standing.comparator.TeamRecordComparator;
-import football.standing.comparator.TeamRecordComparatorAccumulator;
 import lombok.AllArgsConstructor;
 
 @Service

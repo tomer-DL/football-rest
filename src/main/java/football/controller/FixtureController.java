@@ -29,10 +29,8 @@ public class FixtureController {
 	@GetMapping("/football/fixture/season/{seasonId}/team/{teamId}")
 	public List<FixtureDb> getAllFixturesForSeason(
 		@PathVariable int seasonId,
-		@PathVariable int teamId,
-		@PathVariable Optional<Integer> status 
+		@PathVariable int teamId
 	) {
-		FixtureStatus fixtureStatus = FixtureStatus.values()[status.orElse(0)];
 		return fixtureService.getAllFixtures(seasonId, teamId);
 		
 	}
