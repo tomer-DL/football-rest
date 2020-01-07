@@ -9,9 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import football.input.data.fixtures.FixtureWrapper;
 import lombok.AllArgsConstructor;
 
-@SpringBootTest
-@AllArgsConstructor
-@ContextConfiguration()
 public class TestFixtureReader {
 	FixtureReader fixtureReader;
 	

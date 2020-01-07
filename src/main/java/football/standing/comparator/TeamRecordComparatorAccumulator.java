@@ -1,9 +1,10 @@
-package football.standing;
+package football.standing.comparator;
 
 import java.util.Comparator;
 import java.util.List;
 
 import football.db.FixtureDb;
+import football.standing.TeamRecord;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

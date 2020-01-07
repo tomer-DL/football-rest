@@ -1,8 +1,9 @@
-package football.standing;
+package football.standing.comparator;
 
 import java.util.List;
 
 import football.db.FixtureDb;
+import football.standing.TeamRecord;
 
 public class PointsComparator implements TeamRecordComparator {
 

@@ -47,4 +47,8 @@ public class TeamRecord {
 	public int getTotalGoalDifference() {
 		return getHomeGoalDifference() + getAwayGoalDifference();
 	}
+	
+	public int getTotalGoalsFor() {
+		return getAwayGoalsFor() + getHomeGoalsFor();
+	}
 }

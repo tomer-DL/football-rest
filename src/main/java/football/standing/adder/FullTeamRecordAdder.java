@@ -1,4 +1,4 @@
-package football.standing;
+package football.standing.adder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import football.db.FixtureDb;
 import football.db.TeamDb;
+import football.standing.TeamRecord;
 
 public class FullTeamRecordAdder implements TeamRecordAdder {
 
