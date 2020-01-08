@@ -2,6 +2,7 @@ package football.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import football.db.LeagueDb;
@@ -18,6 +19,6 @@ public class LeagueService {
 	}
 	
 	public List<LeagueDb> getAllLeagues() {
-		return leagueRepository.findAll();
+		return leagueRepository.findAll(Sort.by(Sort.Direction.DESC, "seasonYear"));
 	}
 }

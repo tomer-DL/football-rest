@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+var xmlhttp = new XMLHttpRequest();
+var urlAllLeagues = "/football/league/all";
+
+function loadInitialData() { 
+	xmlhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	        var myArr = JSON.parse(this.responseText);
+	        fillLeagueList(myArr);
+	    }
+	};
+	xmlhttp.open("GET", urlAllLeagues, true);
+	xmlhttp.send();
+}
+
+function fillLeagueList(arr) {
+    var sel = document.getElementById("leagues");
+	for(i = 0; i < arr.length; i++) {
+		var opt =document.createElement("option");
+		opt.text = arr[i].country + " " + arr[i].name + " " + arr[i].seasonYear;
+		opt.value = arr[i].id;
+		sel.appendChild(opt);
+	}
+}
+
+function loadStandings() {
+    var sel = document.getElementById("leagues");
+	var leagueId = sel.options[sel.selectedIndex].value;
+	var standingsUrl = "/football/standing/season/" + leagueId + "/all";
+	xmlhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	        var myArr = JSON.parse(this.responseText);
+	        createStandings(myArr);
+	    }
+	};
+	xmlhttp.open("GET", standingsUrl, true);
+	xmlhttp.send();
+}
+
+function createStandings(arr) {
+	var headers = ["rank", "team", "wins", "draws", "losses", "goals", "points"];
+	var table = document.createElement("table");
+	table.setAttribute("border", 1);
+	var row = table.insertRow();
+	for(var h of headers) {
+		var cell = row.insertCell();
+		cell.innerText = h;
+	}
+	var rank=1;
+	for(var team of arr) {
+		row = table.insertRow();
+		var cell = row.insertCell();
+		cell.innerText = rank;
+		cell = row.insertCell();
+		cell.innerText = team.team.teamName;
+		cell = row.insertCell();
+		cell.innerText = team.homeWins + team.awayWins;
+		cell = row.insertCell();
+		cell.innerText = team.homeDraws + team.awayDraws;
+		cell = row.insertCell();
+		cell.innerText = team.homeLosses + team.awayLosses;
+		cell = row.insertCell();
+		cell.innerText = team.totalGoalDifference;
+		cell = row.insertCell();
+		cell.innerText = team.totalPoints;
+		rank++;
+	}
+	var div = document.getElementById("standingsTable");
+	if(div.childNodes != null && div.childNodes.length >0)
+		div.replaceChild(table, div.childNodes[0]);
+	else
+		div.appendChild(table);
+}
+
+</script>
+<body onload="loadInitialData()">
+Choose a league: <select id="leagues"></select>
+<button onclick="loadStandings()">Show Standings</button>
+<div id="standingsTable"></div>
+</body>
+</html>
