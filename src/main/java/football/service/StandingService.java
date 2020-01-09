@@ -44,6 +44,7 @@ public class StandingService {
 		compList.add(new GoalScoredComparator());
 		tieBreakRulesByCountry = new HashMap<String, List<TeamRecordComparator>>();
 		tieBreakRulesByCountry.put("England", compList);
+		tieBreakRulesByCountry.put("default", compList);
 	}
 
 	public List<TeamRecord> getStandings(int seasonId) {
@@ -64,6 +65,8 @@ public class StandingService {
 			TeamRecordAdder adder = adderTypes.get(standingType);
 			String country = fixtures.get(0).getLeague().getCountry();
 			List<TeamRecordComparator> compList = tieBreakRulesByCountry.get(country);
+			if(compList == null)
+				compList = tieBreakRulesByCountry.get("default");
 			return standingsCreator.createStandings(adder, compList, fixtures);
 		}
 		else
