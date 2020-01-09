@@ -21,4 +21,8 @@ public class LeagueService {
 	public List<LeagueDb> getAllLeagues() {
 		return leagueRepository.findAll(Sort.by(Sort.Direction.DESC, "seasonYear"));
 	}
+	
+	public LeagueDb getLeagueById(int id) {
+		return leagueRepository.findById(id).orElse(null);
+	}
 }
