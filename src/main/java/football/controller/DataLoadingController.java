@@ -21,4 +21,12 @@ public class DataLoadingController {
 		dataMiner.readMultipleSeasons(seasonId, token);
 		
 	}
+
+	@PostMapping("/football/loadData/{seasonId}/one")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void loadSpecificSeason(@PathVariable int seasonId, @RequestParam String token) {
+		dataMiner.readSpecificSeason(seasonId, token);
+		
+	}
+
 }
