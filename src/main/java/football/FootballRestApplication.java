@@ -11,6 +11,9 @@ public class FootballRestApplication {
 //		ApplicationContext context = SpringApplication.run(FootballRestApplication.class, args);
 //		DataMiner dataMiner = context.getBean(DataMiner.class);
 //		dataMiner.readMultipleSeasons(2);
+//		ApplicationContext context = SpringApplication.run(FootballRestApplication.class, args);
+//		DataMiner dataMiner = context.getBean(DataMiner.class);
+//		dataMiner.readSpecificSeason(524);
 		
 	}
 
