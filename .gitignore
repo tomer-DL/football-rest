@@ -5,6 +5,7 @@ target/
 !**/src/test/**
 mvnw
 mvnw.cmd
+token.txt
 
 ### STS ###
 .apt_generated
