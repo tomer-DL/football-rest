@@ -33,8 +33,16 @@ public class DataMiner {
 
 	public void readSpecificSeason(int seasonKey, String token) {
 		LeagueDb leagueDb = leagueService.getLeagueById(seasonKey);
+		if(leagueDb == null) {
+			LeagueWrapper leagueWrapper = fixtureReader.readLeagueById(seasonKey, token);
+			League league = leagueWrapper.getApi().getLeagues().get(0);
+			leagueDb = leagueConverter.convert(league);
+		}
+			
 		leagueService.saveLeague(leagueDb);
 		FixtureWrapper fixtureWrapper = fixtureReader.readFixtures(seasonKey, token);
 		fixtureService.saveFixtures(fixtureWrapper.getApi().getFixtures(), leagueDb);;
 	}
+	
+	
 }
