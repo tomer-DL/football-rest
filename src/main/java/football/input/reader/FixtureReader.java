@@ -53,4 +53,18 @@ public class FixtureReader {
 		
 	}
 	
+	public LeagueWrapper readLeagueById(int seasonId, String token) {
+		HttpHeaders headers = new HttpHeaders();
+		String url = "https://api-football-v1.p.rapidapi.com/v2/leagues/league/{id}";
+		headers.add("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
+		headers.add("x-rapidapi-key", token);
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("id", Integer.toString(seasonId));
+		RestTemplate restTemplate = restTemplateBuilder.build();
+		ResponseEntity<LeagueWrapper> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, LeagueWrapper.class, params);
+		return responseEntity.getBody();
+	}
+	
 }
