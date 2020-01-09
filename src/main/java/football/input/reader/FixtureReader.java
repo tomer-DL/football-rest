@@ -23,11 +23,11 @@ public class FixtureReader {
 	
 	RestTemplateBuilder restTemplateBuilder;
 	
-	public FixtureWrapper readFixtures(int seasonId) {
+	public FixtureWrapper readFixtures(int seasonId, String token) {
 		HttpHeaders headers = new HttpHeaders();
 		String url = "https://api-football-v1.p.rapidapi.com/v2/fixtures/league/{id}";
 		headers.add("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
-		headers.add("x-rapidapi-key", "97c79c7b1emsh9faf32bf5578dcap1e2d41jsn9b9552be2ef8");
+		headers.add("x-rapidapi-key", token);
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 		Map<String, String> params = new HashMap<String, String>();
@@ -38,11 +38,11 @@ public class FixtureReader {
 	}
 	
 	
-	public LeagueWrapper readLeagues(int seasonId) {
+	public LeagueWrapper readLeagues(int seasonId, String token) {
 		HttpHeaders headers = new HttpHeaders();
 		String url = "https://api-football-v1.p.rapidapi.com/v2/leagues/seasonsAvailable/{id}";
 		headers.add("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
-		headers.add("x-rapidapi-key", "97c79c7b1emsh9faf32bf5578dcap1e2d41jsn9b9552be2ef8");
+		headers.add("x-rapidapi-key", token);
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 		Map<String, String> params = new HashMap<String, String>();
