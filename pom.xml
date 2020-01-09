@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>football</groupId>
-	<artifactId>rest-demo</artifactId>
+	<artifactId>football-rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rest-demo</name>
+	<name>football-rest</name>
 	<description>Rest demo using football api</description>
 
 	<properties>
