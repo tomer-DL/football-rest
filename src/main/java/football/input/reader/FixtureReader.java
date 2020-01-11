@@ -1,5 +1,7 @@
 package football.input.reader;
 
+import java.util.function.Consumer;
+
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,32 @@ public class FixtureReader {
 			.retrieve()
 			.bodyToMono(FixtureWrapper.class)
 			.block();
+	}
+	
+	public void readFixturesAsynch(int seasonId, String token, Consumer<FixtureWrapper> consumer) {
+		ExchangeStrategies exchangeStrategies = 
+			ExchangeStrategies.builder()
+				.codecs(configurer -> configurer
+				.defaultCodecs()
+				.maxInMemorySize(MB))
+				.build();
+		
+		WebClient webClient = WebClient.builder()
+				.exchangeStrategies(exchangeStrategies)
+				.build();
+		
+		webClient.get()
+			.uri(uriBuilder -> uriBuilder
+				.scheme("https")
+				.host(RAPIDAPI_HOST)
+				.path("/v2/fixtures/league/{id}")
+				.build(seasonId))
+			.header("x-rapidapi-host", RAPIDAPI_HOST)
+			.header("x-rapidapi-key", token)
+			.header("accept", MediaType.APPLICATION_JSON_VALUE)
+			.retrieve()
+			.bodyToFlux(FixtureWrapper.class)
+			.subscribe(consumer);
 	}
 	
 	public LeagueWrapper readLeagues(int seasonId, String token) {
