@@ -6,6 +6,7 @@ target/
 mvnw
 mvnw.cmd
 token.txt
+!target/*.jar
 
 ### STS ###
 .apt_generated
