@@ -1,4 +1,4 @@
-package football.input.data.mine;
+package football.input.data;
 
 import org.springframework.stereotype.Service;
 
