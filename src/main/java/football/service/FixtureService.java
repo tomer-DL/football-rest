@@ -27,11 +27,11 @@ public class FixtureService {
 		Set<Integer> teams = new HashSet<Integer>();
 		for (FixtureDb fixtureDb : fixtures) {
 			if(!teams.contains(fixtureDb.getHomeTeam().getId())) {
-				teamRepository.save(fixtureDb.getHomeTeam());
+				teamRepository.saveAndFlush(fixtureDb.getHomeTeam());
 				teams.add(fixtureDb.getHomeTeam().getId());
 			}
 			if(!teams.contains(fixtureDb.getAwayTeam().getId())) {
-				teamRepository.save(fixtureDb.getAwayTeam());
+				teamRepository.saveAndFlush(fixtureDb.getAwayTeam());
 				teams.add(fixtureDb.getAwayTeam().getId());
 			}
 			fixtureRepository.save(fixtureDb);
@@ -46,7 +46,6 @@ public class FixtureService {
 			fixtureDb.setLeague(league);
 			fixtureDbs.add(fixtureDb);
 		}
-		
 		saveFixturesDb(fixtureDbs);
 	}
 
