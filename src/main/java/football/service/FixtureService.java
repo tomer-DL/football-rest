@@ -56,5 +56,8 @@ public class FixtureService {
 	public List<FixtureDb> getAllFixtures(int seasonId, int teamId) {
 		return fixtureRepository.findByLeagueIdAndTeamId(seasonId, teamId);
 	}
-	
+
+	public List<FixtureDb> getTeamVsTeamFixtures(int team1, int team2) {
+		return fixtureRepository.findTeamVsTeam(team1, team2);
+	}
 }

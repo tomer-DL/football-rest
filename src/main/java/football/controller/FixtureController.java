@@ -34,4 +34,10 @@ public class FixtureController {
 		return fixtureService.getAllFixtures(seasonId, teamId);
 		
 	}
+	
+	@GetMapping("/football/fixture/teamVteam/{team1},{team2}")
+	public List<FixtureDb> getTeamVsTeam(@PathVariable int team1, @PathVariable int team2) {
+		return fixtureService.getTeamVsTeamFixtures(team1, team2);
+	}
+	
 }
