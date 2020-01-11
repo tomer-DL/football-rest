@@ -18,7 +18,6 @@ public class TeamController {
 	@GetMapping("/football/team/{teamId}")
 	public TeamDb getTeamById(@PathVariable int teamId) {
 		TeamDb team = teamService.getTeam(teamId);
-		System.out.println(team);
 		return team;
 	}
 
