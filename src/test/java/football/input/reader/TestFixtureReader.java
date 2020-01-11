@@ -1,9 +1,5 @@
 package football.input.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import football.input.data.fixtures.FixtureWrapper;
-
 public class TestFixtureReader {
 	FixtureReader fixtureReader;
 	
