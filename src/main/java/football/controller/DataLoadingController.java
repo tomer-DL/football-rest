@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import football.input.data.DataMiner;
 import lombok.AllArgsConstructor;
-
+ 
 @RestController
 @AllArgsConstructor
 public class DataLoadingController {
