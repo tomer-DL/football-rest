@@ -1,17 +1,10 @@
 package football.input.reader;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import football.input.data.fixtures.FixtureWrapper;
 import football.input.data.leagues.LeagueWrapper;
@@ -21,50 +14,60 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class FixtureReader {
 	
+	private static final String RAPIDAPI_HOST = "api-football-v1.p.rapidapi.com";
+	private static final int MB = 1024*1024;
 	RestTemplateBuilder restTemplateBuilder;
 	
 	public FixtureWrapper readFixtures(int seasonId, String token) {
-		HttpHeaders headers = new HttpHeaders();
-		String url = "https://api-football-v1.p.rapidapi.com/v2/fixtures/league/{id}";
-		headers.add("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
-		headers.add("x-rapidapi-key", token);
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("id", Integer.toString(seasonId));
-		RestTemplate restTemplate = restTemplateBuilder.build();
-		ResponseEntity<FixtureWrapper> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, FixtureWrapper.class, params);
-		return responseEntity.getBody();
+		ExchangeStrategies exchangeStrategies = 
+			ExchangeStrategies.builder()
+				.codecs(configurer -> configurer
+				.defaultCodecs()
+				.maxInMemorySize(MB))
+				.build();
+		WebClient webClient = WebClient.builder()
+				.exchangeStrategies(exchangeStrategies)
+				.build();
+		return webClient.get()
+			.uri(uriBuilder -> uriBuilder
+				.scheme("https")
+				.host(RAPIDAPI_HOST)
+				.path("/v2/fixtures/league/{id}")
+				.build(seasonId))
+			.header("x-rapidapi-host", RAPIDAPI_HOST)
+			.header("x-rapidapi-key", token)
+			.header("accept", MediaType.APPLICATION_JSON_VALUE)
+			.retrieve()
+			.bodyToMono(FixtureWrapper.class)
+			.block();
 	}
-	
 	
 	public LeagueWrapper readLeagues(int seasonId, String token) {
-		HttpHeaders headers = new HttpHeaders();
-		String url = "https://api-football-v1.p.rapidapi.com/v2/leagues/seasonsAvailable/{id}";
-		headers.add("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
-		headers.add("x-rapidapi-key", token);
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("id", Integer.toString(seasonId));
-		RestTemplate restTemplate = restTemplateBuilder.build();
-		ResponseEntity<LeagueWrapper> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, LeagueWrapper.class, params);
-		return responseEntity.getBody();
-		
+		WebClient webClient = WebClient.create("https://" + RAPIDAPI_HOST);
+		return webClient.get()
+			.uri(uriBuilder -> uriBuilder
+				.path("/v2/leagues/seasonsAvailable/{id}")
+				.build(seasonId))
+			.header("x-rapidapi-host", RAPIDAPI_HOST)
+			.header("x-rapidapi-key", token)
+			.header("accept", MediaType.APPLICATION_JSON_VALUE)
+			.retrieve()
+			.bodyToMono(LeagueWrapper.class)
+			.block();
 	}
-	
+
 	public LeagueWrapper readLeagueById(int seasonId, String token) {
-		HttpHeaders headers = new HttpHeaders();
-		String url = "https://api-football-v1.p.rapidapi.com/v2/leagues/league/{id}";
-		headers.add("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
-		headers.add("x-rapidapi-key", token);
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("id", Integer.toString(seasonId));
-		RestTemplate restTemplate = restTemplateBuilder.build();
-		ResponseEntity<LeagueWrapper> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, LeagueWrapper.class, params);
-		return responseEntity.getBody();
+		WebClient webClient = WebClient.create("https://" + RAPIDAPI_HOST);
+		return webClient.get()
+			.uri(uriBuilder -> uriBuilder
+				.path("/v2/leagues/league/{id}")
+				.build(seasonId))
+			.header("x-rapidapi-host", RAPIDAPI_HOST)
+			.header("x-rapidapi-key", token)
+			.header("accept", MediaType.APPLICATION_JSON_VALUE)
+			.retrieve()
+			.bodyToMono(LeagueWrapper.class)
+			.block();
 	}
-	
+
 }
