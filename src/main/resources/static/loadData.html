@@ -24,7 +24,7 @@ $(function(){
 function loadPremierLeage() {
 	console.log("loadPremierLeage was called");
 	initStatusData();
-	updaterInterval = setInterval("readStatus()", 200);
+	updaterInterval = setInterval("readStatus()", 500);
 	var token = document.getElementById("token").value;
 	document.getElementById("wsStatus").innerText = "sending request...";
 	$.post("/football/loadData/2/all", 
@@ -40,7 +40,7 @@ function loadPremierLeage() {
 function loadLaLiga() {
 	console.log("loadLaLiga was called");
 	initStatusData();
-	updaterInterval = setInterval("readStatus()", 200);
+	updaterInterval = setInterval("readStatus()", 500);
 	var token = document.getElementById("token").value;
 	document.getElementById("wsStatus").innerText = "sending request...";
 	$.post("/football/loadData/775/one", 
