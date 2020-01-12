@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="windows-1255">
+<title>Instructions</title>
+<script src="jquery/jquery-3.4.1.min.js"></script>
+<script>
+$(function(){
+	$("#topMenu").load("links.html"); 
+	$("#status").load("status.html"); 
+});
+</script>
+</head>
+<body>
+<div id="topMenu"></div>
+<div id="mainText"><br/>
+<h3>instructions</h3>
+<p>Loading this project creates a Database schema called Football. The schema has 3 tables: 
+<ul>
+	<li><b>League</b> which represents a league season.</li>
+	<li><b>Team</b> which represents a football club.</li>   
+	<li><b>Fixture</b> which represents details of a football match.</li>   
+</ul>
+</p>
+<p>The database is created empty. The status bar at the bottom of this page should show:<br/> 
+seasons: 0 teams: 0 fixtures: 0<br/>
+
+<p>The data we will be using is taken from another REST api.<br/>
+So, first we need to fetch it from there to our database.<br/>
+In order to load the data:
+<ol>
+	<li>click the link <i>Load Data</i></li>
+	<li>Enter the token sent to you in the mail</li>
+	<li>Push one of the buttons and see how the status changes</li>
+</ol>
+</p> 
+<p>The call to the web service is asynchronous.<br/>
+So you would see the web service status changes to "success", when the call to the web service is done, before the results are back.<br/>
+The status below that shows the number of records in each of the tables will change when the data is actually loaded.
+</p>
+<p>
+After loading the data, you can test the next two links, showing the standings (league table), and team vs. team fixtures.
+</p>
+
+</div><br/>
+<div id="status"></div>
+</body>
+</html>

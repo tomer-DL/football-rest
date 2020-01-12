@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="windows-1255">
+<title>Load Football Data</title>
+<script src="jquery/jquery-3.4.1.min.js"></script>
+<script>
+var updaterInterval;
+
+var statusSeasons;
+var statusTeams;
+var statusFixtures;
+var lastStatusSeasons;
+var lastStatusTeams;
+var lastStatusFixtures;
+
+var lastChange;
+
+$(function(){
+	$("#topMenu").load("links.html"); 
+	$("#status").load("status.html"); 
+});
+
+function loadPremierLeage() {
+	console.log("loadPremierLeage was called");
+	initStatusData();
+	updaterInterval = setInterval("readStatus()", 200);
+	var token = document.getElementById("token").value;
+	document.getElementById("wsStatus").innerText = "sending request...";
+	$.post("/football/loadData/2/all", 
+		{"token" : token},
+		function(data, status) {
+			document.getElementById("wsStatus").innerText = status;
+		}
+	).fail(function(jqXHR, textStatus, error) {
+		document.getElementById("wsStatus").innerText = textStatus;
+	});
+}
+
+function loadLaLiga() {
+	console.log("loadLaLiga was called");
+	initStatusData();
+	updaterInterval = setInterval("readStatus()", 200);
+	var token = document.getElementById("token").value;
+	document.getElementById("wsStatus").innerText = "sending request...";
+	$.post("/football/loadData/775/one", 
+		{"token" : token},
+		function(data, status) {
+			document.getElementById("wsStatus").innerText = status;
+		}
+	).fail(function(jqXHR, textStatus, error) {
+		document.getElementById("wsStatus").innerText = textStatus;
+	});
+}
+
+function readStatusData() {
+	console.log("readStatusData was called");
+
+	statusSeasons = document.getElementById("seasons").innerText;
+	statusTeams = document.getElementById("teams").innerText;
+	statusFixtures = document.getElementById("fixtures").innerText;
+} 
+
+function setCusrrentToLast() {
+	console.log("setCusrrentToLast was called");
+	lastStatusSeasons = statusSeasons;
+	lastStatusTeams = statusTeams;
+	lastStatusFixtures = statusFixtures;
+	var d = new Date();
+	lastChange = d.getTime();
+	console.log("last change: " + lastChange);
+}
+
+function initStatusData() {
+	readStatusData();
+	setCusrrentToLast();
+} 
+
+
+function readStatus() {
+	console.log("readStatus was called");
+	if(lastStatusSeasons != statusSeasons || 
+		lastStatusTeams != statusTeams || 
+		lastStatusFixtures != statusFixtures) {
+		
+		setCusrrentToLast();
+	}
+	else {
+		var d = new Date();
+		if(d.getTime() > lastChange + 2000) {// no change in 2 seconds
+			console.log("Clearing Inreval");
+			clearInterval(updaterInterval);
+			return;
+		}
+	}
+	showStatus();
+	readStatusData();
+	
+}
+
+</script>
+</head>
+<body>
+<div id="topMenu"></div>
+<div id="mainText"><br/>
+Token: <input type="text" id="token"/><br/><br/>
+<button onclick="loadPremierLeage()">Load 10 English premier league seasons</button><br/><br/>
+<button onclick="loadLaLiga()">Load current Spanish La liga season</button><br/><br/>
+
+
+
+<div>Web service status: <span id="wsStatus">Not Active</span></div>
+</div><br/>
+<div id="status"></div>
+</body>
+</html>

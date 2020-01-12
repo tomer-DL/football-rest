@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="windows-1255">
+<title>Fixtures</title>
+<script src="jquery/jquery-3.4.1.min.js"></script>
+<script>
+
+$(function(){
+	$("#topMenu").load("links.html"); 
+	$("#status").load("status.html"); 
+	$.get("/football/teams/all", function(data, status){
+		if (status == "success") { 
+			fillTeamSelects(data);
+		}
+	});
+});
+
+function createOption(teamName, teamId) {
+	var opt =document.createElement("option");
+	opt.text = teamName;
+	opt.value = teamId;
+	return opt;
+}
+
+function fillTeamSelects(arr) {
+    var sel1 = document.getElementById("team1");
+    var sel2 = document.getElementById("team2");
+	for(i = 0; i < arr.length; i++) {
+		sel1.appendChild(createOption(arr[i].teamName, arr[i].id));
+		sel2.appendChild(createOption(arr[i].teamName, arr[i].id));
+	}
+	sel1.selectedIndex=0;
+	sel2.selectedIndex=0;
+	
+}
+
+function showTeamVsTeam() {
+    var sel1 = document.getElementById("team1");
+    var sel2 = document.getElementById("team2");
+	var teamId1 = sel1.options[sel1.selectedIndex].value;
+	var teamId2 = sel2.options[sel2.selectedIndex].value;
+	if(team1 != team2) {
+		var url = "/football/fixture/teamVteam/" + teamId1 + ","  + teamId2;
+		$.get(url, function(data, status){
+			if (status == "success") { 
+				showFixtureTable(data);
+			}
+		});
+	}
+	else {
+		var div = document.getElementById("fixtureTable");
+		div.innerHTML = "<span>Can't choose twice the same team</span>";
+	}
+	
+}
+
+function showFixtureTable(arr) {
+/*
+	var headers = ["rank", "team", "games", "wins", "draws", "losses", "goals", "points"];
+	var table = document.createElement("table");
+	table.setAttribute("border", 1);
+	var row = table.insertRow();
+	for(var h of headers) {
+		var cell = row.insertCell();
+		cell.innerText = h;
+	}
+	var rank=1;
+*/
+	if(arr == null || arr.length == 0) {
+		var div = document.getElementById("fixtureTable");
+		div.innerHTML = "<span>No fixtures for those two teams</span>";
+	}
+	var table = document.createElement("table");
+	table.setAttribute("border", 1);
+	var lastLeagueId=-1;
+
+	for(var fixture of arr) {
+		if(fixture.league.id != lastLeagueId) {
+			row = table.insertRow();
+			var cell = row.insertCell();
+			cell.innerText = fixture.league.country + " " + fixture.league.name + " " + fixture.league.seasonYear;
+			cell.setAttribute("colspan",2);
+			lastLeagueId = fixture.league.id;
+		}
+		row = table.insertRow();
+		var cell = row.insertCell();
+		cell.innerText = fixture.homeTeam.teamName + "-" + fixture.awayTeam.teamName;
+		cell = row.insertCell();
+		cell.innerText = fixture.goalsHomeTeam + ":" + fixture.goalsAwayTeam;
+	}
+	
+	var div = document.getElementById("fixtureTable");
+	if(div.childNodes != null && div.childNodes.length >0)
+		div.replaceChild(table, div.childNodes[0]);
+	else
+		div.appendChild(table);
+}
+
+
+
+
+</script>
+</head>
+<body>
+<div id="topMenu"></div>
+<div id="mainText"><br/>
+Team 1: <select id="team1"></select><br/><br/>
+Team 2: <select id="team2"></select><br/><br/>
+<button onclick="showTeamVsTeam()">Show Fixtures</button>
+</div><br/>
+<div id="fixtureTable"></div>
+<div id="status"></div>
+</body>
+</html>

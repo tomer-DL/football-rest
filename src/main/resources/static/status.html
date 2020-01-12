@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="windows-1255">
+<title>Status</title>
+<script src="jquery/jquery-3.4.1.min.js"></script>
+<script>
+$(function(){
+	showStatus();
+});
+
+function showStatus() {
+	console.log("showStatus was called");
+	$.get("/football/metadata", function(data, status){
+		if (status == "success") {
+			document.getElementById("seasons").innerText = data.seasons;
+			document.getElementById("teams").innerText = data.teams;
+			document.getElementById("fixtures").innerText = data.fixtures;
+	    }
+	});
+}
+</script>
+</head>
+<body>
+<div id="status">seasons: <span id="seasons"></span> teams: <span id="teams"></span> fixtures: <span id="fixtures"></span></div>
+</body>
+</html>
