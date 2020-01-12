@@ -8,16 +8,22 @@
 $(function(){
 	showStatus();
 });
+var locked = false;
 
 function showStatus() {
 	console.log("showStatus was called");
-	$.get("/football/metadata", function(data, status){
-		if (status == "success") {
-			document.getElementById("seasons").innerText = data.seasons;
-			document.getElementById("teams").innerText = data.teams;
-			document.getElementById("fixtures").innerText = data.fixtures;
-	    }
-	});
+	if(!locked) {
+		locked = true;
+		$.get("/football/metadata", function(data, status){
+			if (status == "success") {
+				document.getElementById("seasons").innerText = data.seasons;
+				document.getElementById("teams").innerText = data.teams;
+				document.getElementById("fixtures").innerText = data.fixtures;
+				
+		    }
+			locked=false;
+		});
+	}
 }
 </script>
 </head>
