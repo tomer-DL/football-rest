@@ -5,19 +5,21 @@ import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import football.db.FixtureDb;
-import football.db.enums.FixtureStatus;
+import football.model.FixtureDb;
+import football.model.enums.FixtureStatus;
 import football.service.FixtureService;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/football/fixture")
 public class FixtureController {
 	private FixtureService fixtureService;
 	
-	@GetMapping("/football/fixture/season/{seasonId},{status}")
+	@GetMapping("/season/{seasonId}/{status}")
 	public List<FixtureDb> getAllFixturesForSeason(
 		@PathVariable int seasonId,
 		@PathVariable Optional<Integer> status 
@@ -26,7 +28,7 @@ public class FixtureController {
 		return fixtureService.getAllFixtures(seasonId, fixtureStatus);
 	}
 	
-	@GetMapping("/football/fixture/season/{seasonId}/team/{teamId}")
+	@GetMapping("/season/{seasonId}/team/{teamId}")
 	public List<FixtureDb> getAllFixturesForSeason(
 		@PathVariable int seasonId,
 		@PathVariable int teamId
@@ -35,7 +37,7 @@ public class FixtureController {
 		
 	}
 	
-	@GetMapping("/football/fixture/teamVteam/{team1},{team2}")
+	@GetMapping("/teamVteam/{team1}/{team2}")
 	public List<FixtureDb> getTeamVsTeam(@PathVariable int team1, @PathVariable int team2) {
 		return fixtureService.getTeamVsTeamFixtures(team1, team2);
 	}
