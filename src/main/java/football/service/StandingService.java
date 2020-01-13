@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import football.exception.ResourceNotFoundException;
 import football.model.FixtureDb;
 import football.model.enums.FixtureStatus;
 import football.repository.FixtureRepository;
@@ -70,6 +71,6 @@ public class StandingService {
 			return standingsCreator.createStandings(adder, compList, fixtures);
 		}
 		else
-			return null;
+			throw new ResourceNotFoundException("No fixtures were found to create Standings");
 	}
 }

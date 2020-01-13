@@ -5,9 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.management.relation.RelationNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import football.converter.FixtureToFixtureDb;
+import football.exception.ResourceNotFoundException;
 import football.input.data.fixtures.Fixture;
 import football.model.FixtureDb;
 import football.model.LeagueDb;
@@ -50,14 +53,26 @@ public class FixtureService {
 	}
 
 	public List<FixtureDb> getAllFixtures(int seasonId, FixtureStatus fixtureStatus) {
-		return fixtureRepository.findByLeagueIdAndStatus(seasonId, fixtureStatus);
+		List<FixtureDb> fixtures = fixtureRepository.findByLeagueIdAndStatus(seasonId, fixtureStatus);
+		if (fixtures.size() >0)
+			return fixtures;
+		else 
+			throw new ResourceNotFoundException("No fixtures are available for this this season");
 	}
 
 	public List<FixtureDb> getAllFixtures(int seasonId, int teamId) {
-		return fixtureRepository.findByLeagueIdAndTeamId(seasonId, teamId);
+		List<FixtureDb> fixtures = fixtureRepository.findByLeagueIdAndTeamId(seasonId, teamId); 
+		if (fixtures.size() >0)
+			return fixtures;
+		else 
+			throw new ResourceNotFoundException("No fixtures are available for this this team in this season");
 	}
 
 	public List<FixtureDb> getTeamVsTeamFixtures(int team1, int team2) {
-		return fixtureRepository.findTeamVsTeam(team1, team2);
+		List<FixtureDb> fixtures = fixtureRepository.findTeamVsTeam(team1, team2);
+		if (fixtures.size() >0)
+			return fixtures;
+		else 
+			throw new ResourceNotFoundException("No fixtures are available between those two teams");
 	}
 }
