@@ -38,7 +38,8 @@ public class DataMiner {
 	}
 	
 	private LeagueDb createLeagueDb(int seasonKey, String token) {
-		LeagueDb leagueDb = leagueService.getLeagueById(seasonKey);
+		LeagueDb leagueDb;
+		leagueDb = leagueService.getLeagueByIdOrNull(seasonKey);
 		if(leagueDb == null) {
 			LeagueWrapper leagueWrapper = fixtureReader.readLeagueById(seasonKey, token);
 			League league = leagueWrapper.getApi().getLeagues().get(0);
