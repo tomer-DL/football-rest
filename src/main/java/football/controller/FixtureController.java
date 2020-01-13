@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import football.model.FixtureDb;
 import football.model.enums.FixtureStatus;
 import football.service.FixtureService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
+@Api(tags="Fixture Controller")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/football/fixture")
@@ -20,6 +23,7 @@ public class FixtureController {
 	private FixtureService fixtureService;
 	
 	@GetMapping("/season/{seasonId}/{status}")
+	@ApiOperation("Get all fixtures for a specific season by status")
 	public List<FixtureDb> getAllFixturesForSeason(
 		@PathVariable int seasonId,
 		@PathVariable Optional<Integer> status 
@@ -29,6 +33,7 @@ public class FixtureController {
 	}
 	
 	@GetMapping("/season/{seasonId}/team/{teamId}")
+	@ApiOperation("Get all fixtures for a specific team for a specific season")
 	public List<FixtureDb> getAllFixturesForSeason(
 		@PathVariable int seasonId,
 		@PathVariable int teamId
@@ -38,6 +43,7 @@ public class FixtureController {
 	}
 	
 	@GetMapping("/teamVteam/{team1}/{team2}")
+	@ApiOperation("Get all fixtures that involves the two teams specified")
 	public List<FixtureDb> getTeamVsTeam(@PathVariable int team1, @PathVariable int team2) {
 		return fixtureService.getTeamVsTeamFixtures(team1, team2);
 	}

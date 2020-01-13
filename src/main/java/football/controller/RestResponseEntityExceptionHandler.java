@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import football.exception.ApiExceptionMessage;
 import football.exception.ResourceNotFoundException;
+import io.swagger.annotations.Api;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {

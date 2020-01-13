@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import football.input.data.DataMiner;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
- 
+
+@Api(tags= {"Data Loading Controller"})
 @RestController
 @AllArgsConstructor
 @RequestMapping("/football/loadData")
@@ -19,6 +22,7 @@ public class DataLoadingController {
 	
 	@PostMapping("/{seasonId}/all")
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiOperation("This will load multiple seasons for a league")
 	public void loadAll(@PathVariable int seasonId, @RequestParam String token) {
 		dataMiner.readMultipleSeasons(seasonId, token);
 		
@@ -26,6 +30,7 @@ public class DataLoadingController {
 
 	@PostMapping("/{seasonId}")
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiOperation("This will load a specific seasons for a league")
 	public void loadSpecificSeason(@PathVariable int seasonId, @RequestParam String token) {
 		dataMiner.readSpecificSeason(seasonId, token);
 		
