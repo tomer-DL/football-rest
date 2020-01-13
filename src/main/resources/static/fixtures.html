@@ -41,7 +41,7 @@ function showTeamVsTeam() {
 	var teamId1 = sel1.options[sel1.selectedIndex].value;
 	var teamId2 = sel2.options[sel2.selectedIndex].value;
 	if(team1 != team2) {
-		var url = "/football/fixture/teamVteam/" + teamId1 + ","  + teamId2;
+		var url = "/football/fixture/teamVteam/" + teamId1 + "/"  + teamId2;
 		$.get(url, function(data, status){
 			if (status == "success") { 
 				showFixtureTable(data);
