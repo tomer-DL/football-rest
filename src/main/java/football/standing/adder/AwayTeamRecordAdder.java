@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import football.db.FixtureDb;
-import football.db.TeamDb;
+import football.model.FixtureDb;
+import football.model.TeamDb;
 import football.standing.TeamRecord;
 
 public class AwayTeamRecordAdder implements TeamRecordAdder {

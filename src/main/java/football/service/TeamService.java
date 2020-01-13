@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import football.db.TeamDb;
+import football.model.TeamDb;
 import football.repository.TeamRepository;
 import lombok.AllArgsConstructor;
 

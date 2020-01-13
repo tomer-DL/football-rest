@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import football.db.FixtureDb;
-import football.db.enums.FixtureStatus;
+import football.model.FixtureDb;
+import football.model.enums.FixtureStatus;
 
 
 public interface FixtureRepository extends JpaRepository<FixtureDb, Integer> {

@@ -8,10 +8,10 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import football.converter.FixtureToFixtureDb;
-import football.db.FixtureDb;
-import football.db.LeagueDb;
-import football.db.enums.FixtureStatus;
 import football.input.data.fixtures.Fixture;
+import football.model.FixtureDb;
+import football.model.LeagueDb;
+import football.model.enums.FixtureStatus;
 import football.repository.FixtureRepository;
 import football.repository.TeamRepository;
 import lombok.AllArgsConstructor;

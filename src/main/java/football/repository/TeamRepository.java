@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import football.db.TeamDb;
+import football.model.TeamDb;
 
 public interface TeamRepository extends JpaRepository<TeamDb, Integer> {
 	public Optional<TeamDb> findByTeamName(String teamName);

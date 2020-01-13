@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import football.db.FixtureDb;
-import football.db.enums.FixtureStatus;
+import football.model.FixtureDb;
+import football.model.enums.FixtureStatus;
 import football.repository.FixtureRepository;
 import football.standing.StandingsCreator;
 import football.standing.TeamRecord;

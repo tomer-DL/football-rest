@@ -1,6 +1,6 @@
 package football.standing;
 
-import football.db.TeamDb;
+import football.model.TeamDb;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

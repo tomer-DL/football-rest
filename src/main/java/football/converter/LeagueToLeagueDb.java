@@ -5,8 +5,8 @@ import java.sql.Date;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
-import football.db.LeagueDb;
 import football.input.data.leagues.League;
+import football.model.LeagueDb;
 
 @Service
 public class LeagueToLeagueDb implements Converter<League, LeagueDb> {

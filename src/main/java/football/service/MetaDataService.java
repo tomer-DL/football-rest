@@ -2,7 +2,7 @@ package football.service;
 
 import org.springframework.stereotype.Service;
 
-import football.db.metaData.RecordCounts;
+import football.model.metaData.RecordCounts;
 import football.repository.FixtureRepository;
 import football.repository.LeagueRepository;
 import football.repository.TeamRepository;

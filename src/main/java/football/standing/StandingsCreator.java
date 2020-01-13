@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import football.db.FixtureDb;
+import football.model.FixtureDb;
 import football.standing.adder.TeamRecordAdder;
 import football.standing.comparator.TeamRecordComparator;
 import football.standing.comparator.TeamRecordComparatorAccumulator;

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
-import football.db.enums.FixtureStatus;
+import football.model.enums.FixtureStatus;
 
 @Service
 public class StringToFixtureStatus implements Converter<String, FixtureStatus> {

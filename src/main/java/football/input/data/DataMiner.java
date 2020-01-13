@@ -3,10 +3,10 @@ package football.input.data;
 import org.springframework.stereotype.Service;
 
 import football.converter.LeagueToLeagueDb;
-import football.db.LeagueDb;
 import football.input.data.leagues.League;
 import football.input.data.leagues.LeagueWrapper;
 import football.input.reader.FixtureReader;
+import football.model.LeagueDb;
 import football.service.FixtureService;
 import football.service.LeagueService;
 import lombok.AllArgsConstructor;

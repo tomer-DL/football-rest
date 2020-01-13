@@ -2,7 +2,7 @@ package football.standing.adder;
 
 import java.util.List;
 
-import football.db.FixtureDb;
+import football.model.FixtureDb;
 import football.standing.TeamRecord;
 
 public interface TeamRecordAdder {

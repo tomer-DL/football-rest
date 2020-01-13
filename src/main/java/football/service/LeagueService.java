@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import football.db.LeagueDb;
+import football.model.LeagueDb;
 import football.repository.LeagueRepository;
 import lombok.AllArgsConstructor;
 

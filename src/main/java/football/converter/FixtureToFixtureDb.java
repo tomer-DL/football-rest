@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
-import football.db.FixtureDb;
 import football.input.data.fixtures.Fixture;
+import football.model.FixtureDb;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

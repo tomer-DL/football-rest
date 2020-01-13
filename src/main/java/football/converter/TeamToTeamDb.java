@@ -3,9 +3,9 @@ package football.converter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
-import football.db.TeamDb;
 import football.input.data.fixtures.AwayTeam;
 import football.input.data.fixtures.HomeTeam;
+import football.model.TeamDb;
 
 @Service
 public class TeamToTeamDb implements Converter<HomeTeam, TeamDb> {
