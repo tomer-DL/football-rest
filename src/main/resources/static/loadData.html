@@ -43,7 +43,7 @@ function loadLaLiga() {
 	updaterInterval = setInterval("readStatus()", 500);
 	var token = document.getElementById("token").value;
 	document.getElementById("wsStatus").innerText = "sending request...";
-	$.post("/football/loadData/775/one", 
+	$.post("/football/loadData/775", 
 		{"token" : token},
 		function(data, status) {
 			document.getElementById("wsStatus").innerText = status;
