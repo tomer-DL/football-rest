@@ -33,7 +33,7 @@ function loadPremierLeage() {
 			document.getElementById("wsStatus").innerText = status;
 		}
 	).fail(function(jqXHR, textStatus, error) {
-		document.getElementById("wsStatus").innerText = textStatus;
+		document.getElementById("wsStatus").innerText = jqXHR.responseJSON.message;
 	});
 }
 
@@ -49,7 +49,7 @@ function loadLaLiga() {
 			document.getElementById("wsStatus").innerText = status;
 		}
 	).fail(function(jqXHR, textStatus, error) {
-		document.getElementById("wsStatus").innerText = textStatus;
+		document.getElementById("wsStatus").innerText = jqXHR.responseJSON.message;
 	});
 }
 

@@ -13,6 +13,8 @@ $(function(){
 		if (status == "success") { 
 			fillTeamSelects(data);
 		}
+	}).fail(function(jqXHR, textStatus, error) {
+		document.getElementById("fixtureTable").innerText = jqXHR.responseJSON.message;
 	});
 });
 
@@ -40,12 +42,14 @@ function showTeamVsTeam() {
     var sel2 = document.getElementById("team2");
 	var teamId1 = sel1.options[sel1.selectedIndex].value;
 	var teamId2 = sel2.options[sel2.selectedIndex].value;
-	if(team1 != team2) {
+	if(teamId1 != teamId2) {
 		var url = "/football/fixture/teamVteam/" + teamId1 + "/"  + teamId2;
 		$.get(url, function(data, status){
 			if (status == "success") { 
 				showFixtureTable(data);
 			}
+		}).fail(function(jqXHR, textStatus, error) {
+			document.getElementById("fixtureTable").innerText = jqXHR.responseJSON.message;
 		});
 	}
 	else {

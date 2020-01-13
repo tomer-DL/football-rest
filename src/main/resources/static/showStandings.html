@@ -15,7 +15,8 @@ $(function(){
 	$.get(urlAllLeagues, function(data, status){
 		if (status == "success") 
 			fillLeagueList(data);
-		
+	}).fail(function(jqXHR, textStatus, error) {
+		document.getElementById("standingsTable").innerText = jqXHR.responseJSON.message;
 	});
 });
 
@@ -40,6 +41,8 @@ function loadStandings() {
 		if (status == "success") 
 			createStandings(data);
 		
+	}).fail(function(jqXHR, textStatus, error) {
+		document.getElementById("standingsTable").innerText = jqXHR.responseJSON.message;
 	});
 }
 
