@@ -1,4 +1,4 @@
-package football.db.metaData;
+package football.model.metaData;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

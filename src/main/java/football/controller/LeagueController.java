@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import football.db.LeagueDb;
+import football.model.LeagueDb;
 import football.service.LeagueService;
 import lombok.AllArgsConstructor;
 

@@ -1,4 +1,4 @@
-package football.db;
+package football.model;
 
 import java.sql.Date;
 

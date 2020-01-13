@@ -1,4 +1,4 @@
-package football.db;
+package football.model;
 
 import java.sql.Date;
 
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import football.db.enums.FixtureStatus;
+import football.model.enums.FixtureStatus;
 import lombok.Getter;
 import lombok.Setter;
 
