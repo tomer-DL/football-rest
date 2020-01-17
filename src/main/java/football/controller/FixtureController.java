@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 public class FixtureController {
 	private FixtureService fixtureService;
 	
-	@GetMapping("/season/{seasonId}/{status}")
+	@GetMapping({"/season/{seasonId}", "/season/{seasonId}/{status}"})
 	@ApiOperation("Get all fixtures for a specific season by status")
 	public List<FixtureDb> getAllFixturesForSeason(
 		@PathVariable int seasonId,
