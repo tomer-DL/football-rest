@@ -25,7 +25,7 @@ class FixtureRepositoryTest {
 				repository.findByLeagueIdAndTeamId(700, 40).size()); 
 
 	}
-
+ 
 	@Test
 	void testFindTeamVsTeam() {
 		assertEquals(4, repository.findTeamVsTeam(40, 42).size());
