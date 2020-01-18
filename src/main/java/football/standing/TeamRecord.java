@@ -2,12 +2,14 @@ package football.standing;
 
 import football.model.TeamDb;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class TeamRecord {
 	private TeamDb team;
 	private int homeGoalsFor;
